@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Fabio Gomes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho do site -->
+    <header class="cabecalho-principal">
+        <h1 class="titulo-site">Meu Portfólio</h1>
+        <p class="subtitulo-site">Bem-vindo ao meu portfólio!</p>
+    </header>
+
+    <!-- Conteúdo principal da página -->
+    <main class="conteudo-principal">
+        
+    <!-- Seção Sobre -->
+        <section id="sobre" class="secao-sobre">
+            <h2 class="titulo-secao">Sobre Mim</h2>
+            <div class="texto-sobre">
+                <p>
+                    Meu nome é Fábio Gomes. Sou estudante de Análise e Desenvolvimento de Sistemas e profissional de TI com foco em automação operacional, sistemas internos e digitalização de processos hospitalares.
+                </p>
+                <br> <!-- Dá um pequeno espaço extra entre os parágrafos -->
+                <p>
+                    Atuando no Hospital Pres. Café Filho, em Extremoz/RN, comecei desenvolvendo automações em Python para o faturamento do SUS e criando aplicações web práticas. Aqui você encontra os projetos que tirei do papel e que já estão em produção, além de alguns projetos pessoais que ainda estão em desenvolvimento.
+                </p>
+            </div>
+        </section>
+        <!-- Seção de Habilidades -->
+        <section id="habilidades" class="secao-habilidades">
+            <h2 class="titulo-secao">Habilidades e Ferramentas</h2>
+            
+            <div class="grade-habilidades">
+                <!-- Categoria 1 -->
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Back-end & Lógica</h3>
+                    <ul class="lista-habilidades">
+                        <li>Python (FastAPI, Flask)</li>
+                        <li>Pandas & Análise de Dados</li>
+                        <li>Scripts de Automação</li>
+                    </ul>
+                </div>
+
+                <!-- Categoria 2 -->
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Front-end</h3>
+                    <ul class="lista-habilidades">
+                        <li>HTML5 & CSS3 Semântico</li>
+                        <li>React & TailwindCSS (Base)</li>
+                        <li>Design Responsivo (Flexbox/Grid)</li>
+                    </ul>
+                </div>
+
+                <!-- Categoria 3 -->
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Infraestrutura & SO</h3>
+                    <ul class="lista-habilidades">
+                        <li>GNU/Linux (Uso avançado/Desktop)</li>
+                        <li>Docker & Banco de Dados (PostgreSQL)</li>
+                        <li>Git & GitHub Actions</li>
+                    </ul>
+                </div>
+
+                <!-- Categoria 4 (O seu diferencial) -->
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">AI Coding & Workflow</h3>
+                    <ul class="lista-habilidades">
+                        <li>Claude (AI Pair Programming)</li>
+                        <li>NotebookLM (Análise e estruturação)</li>
+                        <li>VS Code</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Projetos -->
+        <section id="projetos" class="secao-projetos">
+            <h2 class="titulo-secao">Projetos</h2>
+            
+            <ul class="grade-projetos">
+                <!-- Projeto 1 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">HMPCF Automation System</h3>
+                    <p class="descricao-projeto">
+                        Sistema de automação hospitalar para recepção digital, painel gerencial 
+                        em tempo real e faturamento BPA/SUS. Desenvolvido para o Hospital Municipal 
+                        Pres. Café Filho — Extremoz/RN, Brasil.
+                    </p>
+                    <a href="https://github.com/fabiogomes95/HMPCF-Automation-System" target="_blank" class="botao-projeto" >Ver no GitHub</a>
+                </li>
+
+                <!-- Projeto 2 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">BarrioERP — Sistema SaaS Multi-tenant</h3>
+                    <p class="descricao-projeto">
+                        ERP completo para gestão de restaurantes com isolamento de dados (multi-tenancy). 
+                        Backend assíncrono em FastAPI e PostgreSQL, front-end em React, operando com Docker. 
+                        Implementa controle de acesso por papéis (RBAC) e optimistic locking para garantir 
+                        a integridade financeira das comandas.
+                    </p>
+                    <a href="https://github.com/fabiogomes95/BarrioERP" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                </li>
+
+                <!-- Projeto 3 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Análise Preditiva de Evasão Acadêmica</h3>
+                    <p class="descricao-projeto">
+                        Projeto de Ciência de Dados focado na identificação de padrões de abandono universitário. 
+                        Atuei na engenharia de dados, realizando a extração, limpeza e tratamento da base 
+                        com Python e Pandas para alimentar um dashboard interativo em Streamlit.
+                    </p>
+                    <a href="https://github.com/Senac-EAD-PTI-Grupo/senac-pi-grupo03-2026" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                </li>
+
+                <!-- Projeto 4 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Sheet2Zap MVP</h3>
+                    <p class="descricao-projeto">
+                        Lê os produtos de uma planilha do Google Sheets e finaliza o pedido enviando 
+                        um resumo formatado para o WhatsApp da lojista. Sem banco de dados, sem painel 
+                        admin, sem gateway de pagamento.
+                    </p>
+                    <a href="https://github.com/fabiogomes95/Sheet2Zap-MVP" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                </li>
+
+                <!-- Projeto 5 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Sanji.Fit - Landing Page Responsiva</h3>
+                    <p class="descricao-projeto">
+                        Página de vendas desenvolvida como projeto de estudos prático da disciplina de desenvolvimento web, para captação de alunos 
+                        desenvolvida com marcação semântica e CSS puro. Layout focado em conversão, responsividade via Flexbox e animações nativas, 
+                        sem uso de bibliotecas ou frameworks.
+                    </p>
+                    <a href="https://github.com/fabiogomes95/landing-page-sanji-fit" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                </li>
+                <!-- Projeto 6 -->
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Controle de Estoque CLI (Python)</h3>
+                    <p class="descricao-projeto">
+                        Projeto prático de estruturação de dados. Um sistema de console que utiliza dicionários e funções modulares para cadastrar itens, 
+                        validar entradas de usuário e calcular o total armazenado.
+                    </p>
+                    <a href="https://github.com/fabiogomes95/pti-controle-de-estoque" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+    <!-- Rodapé do Site -->
+    <footer class="rodape-principal">
+        <p>Desenvolvido por Fábio Gomes.</p>
+        <div class="links-contato">
+            <!-- Substitua o # pelo link do seu perfil -->
+            <a href="https://github.com/fabiogomes95" target="_blank" class="link-rodape">GitHub</a>
+            <a href="https://www.linkedin.com/in/fabiogsilva95/" target="_blank" class="link-rodape">LinkedIn</a>
+            <a href="mailto:fabigsilva@disroot.org" target="_blank" class="link-rodape">E-mail</a>
+        </div>
+    </footer>
+
+</body>
+</html>

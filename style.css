@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0c130e;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+/* 3. Cabeçalho Principal */
+.cabecalho-principal {
+    text-align: center; /* Centraliza o texto */
+    padding: 4rem 1rem; /* Dá um respiro dentro da caixa (cima/baixo e lados) */
+    background-color: #080d0a; /* Um tom um pouco mais escuro que o body */
+    border-bottom: 3px solid #10b981; /* O verde vibrante simulando o corte de espada */
+}
+.titulo-site {
+    color: #10b981; /* Verde destaque (cor do cabelo/ataques) */
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+.subtitulo-site {
+    color: #94a3b8; /* Cinza prateado imitando o aço das espadas */
+    font-size: 1.2rem;
+}
+/* 4. Estrutura Central (Onde fica o Sobre Mim e os Projetos) */
+.conteudo-principal {
+    max-width: 1000px; /* Trava o crescimento do site em telas grandes */
+    margin: 0 auto; /* O segredo para centralizar: margem automática nas laterais */
+    padding: 3rem 2rem; /* Afasta o texto das bordas invisíveis da caixa */
+}
+/* Títulos das seções (Sobre Mim e Projetos) */
+.titulo-secao {
+    font-size: 2rem;
+    color: #e2e8f0;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #dc2626; /* Detalhe vermelho (Haramaki/faixa da cintura do Zoro) */
+    padding-left: 10px; /* Afasta o texto da barra vermelha */
+}
+/* =========================================
+   5. MÁGICA DO GRID: A Seção de Projetos
+   ========================================= */
+
+/* Remove a margem do texto 'Sobre Mim' para não grudar nos projetos */
+.secao-sobre {
+    margin-bottom: 4rem;
+}
+
+/* O Container do Grid */
+.grade-projetos {
+    display: grid;
+    /* A regra de ouro: crie colunas de no mínimo 300px. 
+       Se houver espaço (como na sua TV), coloque lado a lado. 
+       Se não houver (como no celular), empilhe. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; /* Espaço entre os cartões */
+    list-style: none; /* Remove as bolinhas pretas da lista HTML */
+}
+
+/* 6. Estilo dos Cartões (Inspirado nas bainhas das espadas) */
+.cartao-projeto {
+    background-color: #151f18; /* Verde bem escuro, quase preto */
+    border: 1px solid #233328; /* Uma borda muito sutil para delimitar o cartão */
+    border-radius: 8px; /* Cantos levemente arredondados */
+    padding: 1.8rem;
+    
+    /* Prepara o cartão para ser animado quando o mouse passar por cima */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* O efeito do "Corte da Espada" ao passar o mouse */
+.cartao-projeto:hover {
+    transform: translateY(-5px); /* Levanta o cartão para cima */
+    border-color: #10b981; /* A borda acende no verde vibrante */
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15); /* Cria uma sombra verde suave */
+}
+
+/* Textos dentro do cartão */
+.titulo-projeto {
+    color: #f8fafc;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.descricao-projeto {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+/* Estilo do Botão do Projeto */
+.botao-projeto {
+    display: inline-block; /* Permite colocar margens e preenchimentos ao redor do texto */
+    margin-top: 1.5rem; /* Empurra o botão um pouco para baixo, desgrudando do texto */
+    padding: 0.6rem 1.2rem; /* Cria o "corpo" do botão (espaço interno) */
+    
+    text-decoration: none; /* Remove aquele sublinhado feio padrão do link */
+    font-weight: bold; /* Deixa o texto em negrito */
+    
+    color: #10b981; /* O verde vibrante que escolhemos */
+    border: 1px solid #10b981; /* Cria a linha da borda do botão na mesma cor */
+    border-radius: 4px; /* Arredonda levemente as pontinhas do botão */
+}
+.rodape-principal {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #080d0a;
+    border-top: 3px solid #10b981;
+}
+.links-contato {
+    margin-top: 1rem;
+}
+.link-rodape {
+    margin: 0 0.5rem;      
+    display: inline-block;
+    color: #10b981; 
+    text-decoration: none; 
+}
+.link-rodape:hover {
+    text-decoration: underline;
+}
+/* =========================================
+   9. Seção de Habilidades
+   ========================================= */
+.secao-habilidades {
+    margin-bottom: 4rem;
+}
+
+.grade-habilidades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.categoria-habilidade {
+    background-color: #0f1712; /* Fundo um pouco mais claro que o base */
+    border: 1px solid #18221b;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.titulo-categoria {
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #233328;
+    padding-bottom: 0.5rem;
+}
+
+.lista-habilidades {
+    list-style: none; /* Tira as bolinhas */
+}
+
+.lista-habilidades li {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start; /* Alinha o texto com o bullet personalizado */
+}
+
+/* Adiciona um "bullet" personalizado com a cor do Zoro antes de cada item */
+.lista-habilidades li::before {
+    content: "▹";
+    color: #10b981; /* Verde vibrante */
+    margin-right: 8px;
+    font-weight: bold;
+}
