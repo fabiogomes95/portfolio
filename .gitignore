@@ -13,3 +13,6 @@ desktop.ini
 
 # Arquivos temporários de export que caem aqui sem querer
 Profile*.pdf
+
+# Lembretes pessoais, não versionar
+PENDENCIAS.md
