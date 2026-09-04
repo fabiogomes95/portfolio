@@ -137,7 +137,11 @@ window.addEventListener("resize", ajustarEspacoDaRolagem);
    ------------------------------------------------------------------------- */
 
 const botaoTopo = document.getElementById("botao-topo");
-const cabecalho = document.getElementById("topo");
+
+// Procuro o cabeçalho pela CLASSE, não pelo id. O id muda entre as versões
+// do site (#topo em português, #top em inglês) — a classe é a mesma nas duas,
+// então este arquivo serve aos dois idiomas sem nenhum "if".
+const cabecalho = document.querySelector(".cabecalho-principal");
 
 if (botaoTopo && cabecalho) {
     const observadorTopo = new IntersectionObserver(function (entradas) {
@@ -226,6 +230,30 @@ if (!prefereMenosMovimento) {
 const formulario = document.getElementById("formulario-contato");
 const retorno = document.getElementById("retorno-formulario");
 
+/* As mensagens de retorno precisam sair no idioma da página. Em vez de duplicar
+   o script, leio o <html lang="..."> e escolho o conjunto de textos.
+   Qualquer coisa que não comece com "en" cai no português. */
+const idioma = document.documentElement.lang.toLowerCase().startsWith("en") ? "en" : "pt";
+
+const TEXTOS = {
+    pt: {
+        enviando: "Enviando...",
+        sucesso: "Mensagem enviada. Respondo assim que puder.",
+        recusado: "Não consegui enviar agora.",
+        alternativa: " Se preferir, me chame em fabiogsilva@disroot.org.",
+        semConexao: "Falha de conexão. Tente de novo ou me chame em fabiogsilva@disroot.org."
+    },
+    en: {
+        enviando: "Sending...",
+        sucesso: "Message sent. I'll get back to you as soon as I can.",
+        recusado: "I couldn't send it right now.",
+        alternativa: " You can also reach me at fabiogsilva@disroot.org.",
+        semConexao: "Connection failed. Please try again or email me at fabiogsilva@disroot.org."
+    }
+};
+
+const t = TEXTOS[idioma];
+
 // Só ligo o comportamento se os dois existirem — assim este arquivo continua
 // funcionando em qualquer página que não tenha o formulário.
 if (formulario && retorno) {
@@ -241,7 +269,7 @@ if (formulario && retorno) {
         // clique repetido enquanto o envio está em andamento.
         botao.disabled = true;
         retorno.className = "retorno-formulario";
-        retorno.textContent = "Enviando...";
+        retorno.textContent = t.enviando;
 
         try {
             const resposta = await fetch(formulario.action, {
@@ -261,7 +289,7 @@ if (formulario && retorno) {
             if (resposta.ok) {
                 formulario.reset(); // limpa os campos
                 retorno.className = "retorno-formulario sucesso";
-                retorno.textContent = "Mensagem enviada. Respondo assim que puder.";
+                retorno.textContent = t.sucesso;
             } else {
                 // Chegou no Formspree mas ele recusou (cota do mês estourada,
                 // campo inválido, etc). A resposta traz o motivo em JSON.
@@ -271,10 +299,10 @@ if (formulario && retorno) {
 
                 const motivo = dados && dados.errors
                     ? dados.errors.map(function (e) { return e.message; }).join(", ")
-                    : "Não consegui enviar agora.";
+                    : t.recusado;
 
                 retorno.className = "retorno-formulario erro";
-                retorno.textContent = motivo + " Se preferir, me chame em fabiogsilva@disroot.org.";
+                retorno.textContent = motivo + t.alternativa;
             }
 
         } catch (erro) {
@@ -282,7 +310,7 @@ if (formulario && retorno) {
             // DNS falhou, etc. O fetch só dá erro nesses casos — resposta
             // HTTP 4xx/5xx NÃO cai no catch, por isso o if/else acima existe.
             retorno.className = "retorno-formulario erro";
-            retorno.textContent = "Falha de conexão. Tente de novo ou me chame em fabiogsilva@disroot.org.";
+            retorno.textContent = t.semConexao;
 
         } finally {
             // finally roda sempre, dando certo ou errado. É o lugar certo pra

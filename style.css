@@ -151,6 +151,35 @@ body {
     border-bottom-color: #10b981;
 }
 
+/* Botão de troca de idioma (PT / EN). Visual diferente dos outros links
+   de propósito: ele não navega dentro da página, troca de página inteira.
+   Parecer igual aos demais faria a pessoa esperar uma rolagem. */
+.menu-idioma {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+
+    color: #94a3b8;
+    border: 1px solid #233328;
+    border-radius: 4px;
+
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-idioma:hover {
+    color: #10b981;
+    border-color: #10b981;
+}
+
+.menu-idioma:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+}
+
 
 /* =========================================
    4. Foco pelo teclado

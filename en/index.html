@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábio Gomes | Python &amp; Automation Developer</title>
+
+    <!-- Versão em inglês. O conteúdo é o mesmo da raiz, traduzido.
+         REGRA: mudou texto lá, mudar aqui também. É o preço de ter duas
+         páginas de verdade em vez de trocar textos com JavaScript. -->
+    <meta name="description" content="Portfolio of Fábio Gomes — developer focused on Python automation, internal systems and the digitalization of hospital processes. Projects built with FastAPI, React, PostgreSQL and Docker.">
+    <meta name="author" content="Fábio Gomes">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fábio Gomes | Python &amp; Automation Developer">
+    <meta property="og:description" content="Python automation, internal systems and digitalization of hospital processes. See the projects already running in production.">
+    <meta property="og:locale" content="en_US">
+    <!-- Diz ao Facebook/LinkedIn que existe uma versão em outro idioma -->
+    <meta property="og:locale:alternate" content="pt_BR">
+    <meta property="og:url" content="https://fabiogomes95.github.io/portfolio/en/">
+
+    <meta property="og:image" content="https://fabiogomes95.github.io/portfolio/og-banner-1200x630.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fábio Gomes portfolio banner — Python &amp; Automation Developer">
+
+    <!-- Canonical aponta pra ELA MESMA. Cada idioma é uma página independente
+         aos olhos do Google — se eu apontasse pra raiz, esta versão sumiria
+         dos resultados em inglês. -->
+    <link rel="canonical" href="https://fabiogomes95.github.io/portfolio/en/">
+
+    <!-- hreflang: é isto que liga as duas versões pro buscador.
+         Sem essas linhas o Google trata as páginas como conteúdo duplicado.
+         x-default = pra onde mandar quem não bate com nenhum idioma listado.
+         O bloco tem que ser IDÊNTICO nas duas páginas, inclusive apontando
+         cada uma pra si mesma. -->
+    <link rel="alternate" hreflang="pt-BR" href="https://fabiogomes95.github.io/portfolio/">
+    <link rel="alternate" hreflang="en" href="https://fabiogomes95.github.io/portfolio/en/">
+    <link rel="alternate" hreflang="x-default" href="https://fabiogomes95.github.io/portfolio/">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080d0a'/><text y='.9em' x='50' font-size='70' text-anchor='middle' fill='%2310b981' font-family='sans-serif' font-weight='bold'>F</text></svg>">
+
+    <!-- ".." porque esta página está em /en/ e o CSS fica na raiz.
+         Mesma coisa pro script.js e pro PDF do currículo, mais abaixo. -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <a href="#content" class="link-pular">Skip to content</a>
+
+    <nav class="menu-navegacao">
+        <a href="#top" class="menu-logo">Fábio Gomes</a>
+
+        <ul class="menu-lista">
+            <li><a href="#about"      class="menu-link">About</a></li>
+            <li><a href="#experience" class="menu-link">Experience</a></li>
+            <li><a href="#skills"     class="menu-link">Skills</a></li>
+            <li><a href="#projects"   class="menu-link">Projects</a></li>
+            <li><a href="#contact"    class="menu-link">Contact</a></li>
+            <!-- Troca de idioma. Não leva a classe "menu-link" de propósito:
+                 senão o script.js tentaria achar uma seção "../" na página. -->
+            <li><a href="../" class="menu-idioma" lang="pt-BR" hreflang="pt-BR">PT</a></li>
+        </ul>
+    </nav>
+
+    <header class="cabecalho-principal" id="top">
+        <h1 class="titulo-site">Fábio Gomes</h1>
+        <p class="subtitulo-site">Python &amp; Automation Developer — internal systems in production</p>
+
+        <!-- O PDF ainda é o currículo em português. Digo isso no rótulo em vez
+             de deixar a pessoa descobrir depois de baixar.
+             PENDENTE: fazer uma versão em inglês e trocar o link aqui. -->
+        <a href="../curriculo-fabio-gomes.pdf" download class="botao-curriculo">
+            Download résumé (PDF, in Portuguese)
+        </a>
+    </header>
+
+    <main class="conteudo-principal" id="content">
+
+        <section id="about" class="secao-sobre">
+            <h2 class="titulo-secao">About Me</h2>
+
+            <div class="texto-sobre">
+                <p>
+                    My name is Fábio Gomes. I work with operational automation, internal systems and the digitalization of hospital processes — and I'm studying Systems Analysis and Development.
+                </p>
+                <p>
+                    At Hospital Pres. Café Filho, in Extremoz/RN, Brazil, I started by writing Python automations for SUS (Brazil's public health system) billing and building practical web applications. Here you'll find the projects I took from idea to production, along with personal projects still in development.
+                </p>
+            </div>
+        </section>
+
+        <section id="experience" class="secao-experiencia">
+            <h2 class="titulo-secao">Experience</h2>
+
+            <ol class="linha-tempo">
+                <li class="item-tempo">
+                    <h3 class="cargo-tempo">IT and Technology Sector Supervisor</h3>
+                    <p class="empresa-tempo">Extremoz City Hall — Extremoz/RN, Brazil</p>
+                    <p class="periodo-tempo">May 2025 — present</p>
+                    <p class="descricao-tempo">
+                        Responsible for the internal system of Hospital Municipal Pres. Café Filho
+                        and for outpatient billing with SUS, Brazil's public health system. I develop
+                        and maintain the hospital automation system in production — digital reception,
+                        real-time management dashboard and BPA/SUS billing file generation — and
+                        automate in Python the routines that previously relied on spreadsheets and
+                        manual data entry.
+                    </p>
+                </li>
+
+                <li class="item-tempo">
+                    <h3 class="cargo-tempo">IT Maintenance and Support Technician</h3>
+                    <p class="empresa-tempo">Extremoz City Hall — Extremoz/RN, Brazil</p>
+                    <p class="periodo-tempo">March 2021 — April 2025</p>
+                    <p class="descricao-tempo">
+                        Technical support and infrastructure across the city hall units: workstation
+                        maintenance and setup, installation and upkeep of local networks, and
+                        day-to-day user support.
+                    </p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="skills" class="secao-habilidades">
+            <h2 class="titulo-secao">Skills and Tools</h2>
+
+            <div class="grade-habilidades">
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Back-end &amp; Logic</h3>
+                    <ul class="lista-habilidades">
+                        <li>Python (FastAPI, Flask)</li>
+                        <li>Pandas &amp; Data Analysis</li>
+                        <li>Automation Scripts</li>
+                    </ul>
+                </div>
+
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Front-end</h3>
+                    <ul class="lista-habilidades">
+                        <li>Semantic HTML5 &amp; CSS3</li>
+                        <li>React &amp; TailwindCSS (basics)</li>
+                        <li>Responsive Design (Flexbox/Grid)</li>
+                    </ul>
+                </div>
+
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">Infrastructure &amp; OS</h3>
+                    <ul class="lista-habilidades">
+                        <li>GNU/Linux (advanced desktop use)</li>
+                        <li>Docker &amp; Databases (PostgreSQL)</li>
+                        <li>Git &amp; GitHub Actions</li>
+                    </ul>
+                </div>
+
+                <div class="categoria-habilidade">
+                    <h3 class="titulo-categoria">AI Coding &amp; Workflow</h3>
+                    <ul class="lista-habilidades">
+                        <li>Claude (AI Pair Programming)</li>
+                        <li>NotebookLM (analysis and structuring)</li>
+                        <li>VS Code</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="secao-projetos">
+            <h2 class="titulo-secao">Projects</h2>
+
+            <ul class="grade-projetos">
+                <li class="cartao-projeto cartao-destaque">
+                    <span class="selo-destaque">In production</span>
+                    <h3 class="titulo-projeto">HMPCF Automation System</h3>
+                    <p class="descricao-projeto">
+                        Hospital automation system covering digital reception, a real-time management
+                        dashboard and BPA/SUS billing. Built for Hospital Municipal Pres. Café Filho —
+                        Extremoz/RN, Brazil.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>FastAPI</li>
+                        <li>PostgreSQL</li>
+                        <li>React</li>
+                        <li>Streamlit</li>
+                        <li>Docker</li>
+                        <li>BPA/SUS</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/HMPCF-Automation-System" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+
+                <li class="cartao-projeto cartao-destaque">
+                    <span class="selo-destaque">Main project</span>
+                    <h3 class="titulo-projeto">BarrioERP — Multi-tenant SaaS</h3>
+                    <p class="descricao-projeto">
+                        Full ERP for restaurant management with data isolation (multi-tenancy).
+                        Async backend in FastAPI and PostgreSQL, React front-end, running on Docker.
+                        Implements role-based access control (RBAC) and optimistic locking to protect
+                        the financial integrity of open tabs.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>FastAPI</li>
+                        <li>SQLAlchemy 2.0</li>
+                        <li>PostgreSQL</li>
+                        <li>React</li>
+                        <li>TypeScript</li>
+                        <li>Docker</li>
+                        <li>RBAC</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/BarrioERP" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Predictive Analysis of Student Dropout</h3>
+                    <p class="descricao-projeto">
+                        Data Science project focused on identifying patterns of university dropout.
+                        I worked on the data engineering side — extraction, cleaning and transformation
+                        of the dataset with Python and Pandas — feeding an interactive Streamlit dashboard.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>Pandas</li>
+                        <li>Jupyter</li>
+                        <li>Streamlit</li>
+                    </ul>
+                    <a href="https://github.com/Senac-EAD-PTI-Grupo/senac-pi-grupo03-2026" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Sheet2Zap MVP</h3>
+                    <p class="descricao-projeto">
+                        Reads products from a Google Sheets spreadsheet and closes the order by sending
+                        a formatted summary to the shop owner's WhatsApp. No database, no admin panel,
+                        no payment gateway.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>Flask</li>
+                        <li>Google Sheets</li>
+                        <li>WhatsApp</li>
+                        <li>LocalStorage</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/Sheet2Zap-MVP" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Sanji.Fit — Responsive Landing Page</h3>
+                    <p class="descricao-projeto">
+                        Sales page built as a hands-on project for a web development course, aimed at
+                        student acquisition, written with semantic markup and pure CSS. Conversion-focused
+                        layout, responsiveness via Flexbox and native animations, with no libraries or
+                        frameworks.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>Flexbox</li>
+                        <li>Responsive</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/landing-page-sanji-fit" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+
+                <li class="cartao-projeto">
+                    <h3 class="titulo-projeto">Inventory Control CLI (Python)</h3>
+                    <p class="descricao-projeto">
+                        Hands-on data structuring project. A console application that uses dictionaries
+                        and modular functions to register items, validate user input and calculate the
+                        stored total.
+                    </p>
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>CLI</li>
+                        <li>Data Structures</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/pti-controle-de-estoque" target="_blank" rel="noopener noreferrer" class="botao-projeto">View on GitHub</a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="contact" class="secao-contato">
+            <h2 class="titulo-secao">Contact</h2>
+            <p class="texto-contato">
+                Open to opportunities in Python, automation and internal systems.
+                Send me a message and I'll get back to you.
+            </p>
+
+            <a href="../curriculo-fabio-gomes.pdf" download class="botao-curriculo botao-curriculo-contato">
+                Download résumé (PDF, in Portuguese)
+            </a>
+
+            <!-- Mesmo endpoint do Formspree da versão em português.
+                 O _subject diferente é o que me diz, na caixa de entrada,
+                 por qual idioma a pessoa chegou. -->
+            <form class="formulario-contato" id="formulario-contato"
+                  action="https://formspree.io/f/mvkoqzdr" method="POST">
+
+                <div class="campo-formulario">
+                    <label for="campo-nome">Name</label>
+                    <input type="text" id="campo-nome" name="nome" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-email">Email</label>
+                    <input type="email" id="campo-email" name="email" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-mensagem">Message</label>
+                    <textarea id="campo-mensagem" name="mensagem" rows="6" required></textarea>
+                </div>
+
+                <input type="hidden" name="_subject" value="New contact from portfolio (EN)">
+                <input type="text" name="_gotcha" class="campo-armadilha" tabindex="-1" autocomplete="off">
+
+                <button type="submit" class="botao-enviar">Send message</button>
+
+                <p class="retorno-formulario" id="retorno-formulario" role="status"></p>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="rodape-principal">
+        <p>Built by Fábio Gomes.</p>
+        <div class="links-contato">
+            <a href="https://github.com/fabiogomes95" target="_blank" rel="noopener noreferrer" class="link-rodape">GitHub</a>
+            <a href="https://www.linkedin.com/in/fabiogsilva95/" target="_blank" rel="noopener noreferrer" class="link-rodape">LinkedIn</a>
+            <a href="mailto:fabiogsilva@disroot.org" class="link-rodape">Email</a>
+        </div>
+    </footer>
+
+    <a href="#top" class="botao-topo" id="botao-topo" aria-label="Back to top">↑</a>
+
+    <script src="../script.js" defer></script>
+
+</body>
+</html>

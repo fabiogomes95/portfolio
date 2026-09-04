@@ -16,6 +16,8 @@
     <meta property="og:title" content="Fábio Gomes | Desenvolvedor Python & Automação">
     <meta property="og:description" content="Automação com Python, sistemas internos e digitalização de processos hospitalares. Veja os projetos que já estão em produção.">
     <meta property="og:locale" content="pt_BR">
+    <!-- Avisa que existe versão em outro idioma -->
+    <meta property="og:locale:alternate" content="en_US">
     <meta property="og:url" content="https://fabiogomes95.github.io/portfolio/">
 
     <!-- Banner do card de preview. A URL TEM que ser completa (https://...) —
@@ -30,6 +32,16 @@
     <!-- Marca qual é o endereço oficial, pro Google não indexar duas vezes
          caso o site fique acessível por mais de uma URL. -->
     <link rel="canonical" href="https://fabiogomes95.github.io/portfolio/">
+
+    <!-- hreflang: é isto que liga as duas versões pro buscador.
+         Sem essas linhas o Google trata as páginas como conteúdo duplicado e
+         escolhe uma pra mostrar, ignorando a outra.
+         x-default = pra onde mandar quem não bate com nenhum idioma listado.
+         O bloco tem que ser IDÊNTICO nas duas páginas, inclusive apontando
+         cada uma pra si mesma. -->
+    <link rel="alternate" hreflang="pt-BR" href="https://fabiogomes95.github.io/portfolio/">
+    <link rel="alternate" hreflang="en" href="https://fabiogomes95.github.io/portfolio/en/">
+    <link rel="alternate" hreflang="x-default" href="https://fabiogomes95.github.io/portfolio/">
 
     <!-- O Twitter/X lê as og: de cima, mas exige esse tipo declarado à parte. -->
     <meta name="twitter:card" content="summary_large_image">
@@ -65,6 +77,11 @@
             <li><a href="#habilidades" class="menu-link">Habilidades</a></li>
             <li><a href="#projetos"    class="menu-link">Projetos</a></li>
             <li><a href="#contato"     class="menu-link">Contato</a></li>
+            <!-- Troca de idioma. NÃO leva a classe "menu-link" de propósito:
+                 o script.js pega todos os .menu-link e tenta achar a seção
+                 correspondente na página — com "en/" ele não acharia nada.
+                 O hreflang diz ao navegador e ao buscador o idioma do destino. -->
+            <li><a href="en/" class="menu-idioma" lang="en" hreflang="en">EN</a></li>
         </ul>
     </nav>
 
