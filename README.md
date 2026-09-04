@@ -1,8 +1,10 @@
 # Portfólio — Fábio Gomes
 
 Site pessoal onde reúno meus projetos de automação, sistemas internos e desenvolvimento web.
+Disponível em português e inglês.
 
 **Ao vivo:** https://fabiogomes95.github.io/portfolio
+**In English:** https://fabiogomes95.github.io/portfolio/en
 
 ![Banner do portfólio](og-banner-1200x630.png)
 
@@ -32,17 +34,30 @@ atualização de terceiro nem carrega script de outro domínio.
 | Interatividade | `IntersectionObserver` para o menu ativo e a revelação ao rolar |
 | Formulário | Formspree via `fetch`, com aprimoramento progressivo |
 | Hospedagem | GitHub Pages |
+| Idiomas | Duas páginas HTML reais (pt-BR e en) ligadas por `hreflang`, em vez de troca de textos por JavaScript — assim cada idioma é indexado separadamente pelo Google |
 
 ## Estrutura
 
 ```
 .
-├── index.html                  # marcação e conteúdo
-├── style.css                   # estilos, organizado em 14 seções comentadas
-├── script.js                   # menu ativo, revelação ao rolar, envio do formulário
-├── og-banner-1200x630.png      # imagem de preview ao compartilhar o link
-└── curriculo-fabio-gomes.pdf   # currículo para download
+├── index.html                  # página em português (é a raiz do site)
+├── en/
+│   └── index.html              # página em inglês — mesmo conteúdo, traduzido
+├── style.css                   # estilos, em 15 seções comentadas — serve às duas
+├── script.js                   # menu ativo, revelação ao rolar, formulário — idem
+├── og-banner-1200x630.png      # imagem do card ao compartilhar o link
+├── curriculo-fabio-gomes.pdf   # currículo em português (usado pela raiz)
+├── cv-fabio-gomes.pdf          # CV em inglês (usado pela /en/)
+└── README.md
 ```
+
+Tudo na raiz de propósito: o GitHub Pages serve a partir dela, então `index.html`,
+`style.css` e `script.js` precisam estar ali. Criar `css/` e `js/` para três
+arquivos só acrescentaria caminho sem ganho nenhum.
+
+O CSS e o JavaScript são **um só para os dois idiomas**. O script lê o
+`<html lang>` para decidir em que língua responder no formulário, e localiza o
+cabeçalho por classe em vez de id, já que o id muda entre as versões.
 
 ## Decisões que valem nota
 
