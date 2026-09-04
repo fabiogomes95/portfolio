@@ -605,6 +605,60 @@ body {
     color: #10b981;
     border: 1px solid #10b981;
     border-radius: 4px;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.botao-projeto:hover {
+    background-color: rgba(16, 185, 129, 0.12);
+}
+
+/* Caixa dos botões do cartão. Só existe nos projetos que têm demo ao vivo —
+   nos outros o link do GitHub fica solto mesmo, e o resultado é igual.
+   Pra somar uma demo em outro projeto: envolver os dois <a> nesta div. */
+.acoes-projeto {
+    display: flex;
+    flex-wrap: wrap; /* no celular os botões empilham em vez de espremer */
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+/* Dentro da caixa quem dá o espaçamento é ela, não os botões. */
+.acoes-projeto .botao-projeto,
+.acoes-projeto .botao-demo {
+    margin-top: 0;
+}
+
+/* Botão preenchido = ação principal. Ver funcionando vale mais que ler o
+   código, então a demo tem mais peso visual que o link do GitHub. */
+.botao-demo {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    color: #0c130e;             /* texto escuro sobre verde = contraste bom */
+    background-color: #10b981;
+    border: 1px solid #10b981;
+    border-radius: 4px;
+
+    transition: background-color 0.2s ease;
+}
+
+.botao-demo:hover {
+    background-color: #0ea472;
+}
+
+.botao-demo:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+}
+
+/* Seta diagonal indicando "abre em outro lugar". Feita em CSS, sem ícone. */
+.botao-demo::after {
+    content: "↗";
+    margin-left: 0.4rem;
 }
 
 
