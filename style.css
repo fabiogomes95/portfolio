@@ -1,139 +1,395 @@
+/* =========================================================================
+   PORTFÓLIO — Fábio Gomes
+   Tema escuro do Zoro: verde #10b981 é o destaque, vermelho #dc2626 é o
+   detalhe, fundo #0c130e quase preto.
+
+   Se eu for trocar o tema, as cores estão espalhadas — considerar migrar
+   pra variáveis CSS (:root { --verde: #10b981 }) antes de mexer.
+
+   MAPA DO ARQUIVO
+     1. Reset e rolagem
+     2. Body
+     3. Menu fixo
+     4. Foco pelo teclado
+     5. Cabeçalho
+     6. Estrutura central e títulos
+     7. Sobre Mim
+     8. Experiência (linha do tempo)
+     9. Habilidades
+    10. Projetos
+    11. Contato
+    12. Rodapé
+    13. Animação de revelação no scroll
+    14. Telas pequenas
+   ========================================================================= */
+
+
+/* =========================================
+   1. Reset e rolagem
+   ========================================= */
+
 * {
     margin: 0;
     padding: 0;
+    /* border-box: largura passa a INCLUIR padding e borda.
+       Sem isso, width 100px + padding 20px viram 140px na tela e todo
+       cálculo de layout fica errado. */
     box-sizing: border-box;
 }
+
+html {
+    /* Rolagem suave ao clicar nos links do menu.
+       Não preciso de JS pra isso — se um dia eu achar um tutorial mandando
+       instalar biblioteca pra scroll suave, é essa linha aqui que resolve. */
+    scroll-behavior: smooth;
+
+    /* NÃO TIRAR. O menu é fixo e cobre o topo; sem isso o título da seção
+       para escondido atrás dele quando clico no link.
+       Se eu mudar a altura do menu, ajustar esse valor junto (sempre um
+       pouco maior que a altura dele). */
+    scroll-padding-top: 5rem;
+}
+
+/* Quem ligou "reduzir movimento" no sistema (enxaqueca, vertigem) recebe o
+   salto direto em vez da animação. Site continua funcionando igual. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+
+/* =========================================
+   2. Body
+   ========================================= */
+
 body {
+    /* Se a primeira fonte não existir na máquina, cai pra próxima.
+       A última é a rede de segurança. */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     background-color: #0c130e;
     color: #e2e8f0;
+
+    /* Sem unidade de propósito: cada elemento calcula a partir do próprio
+       tamanho de fonte. É o jeito recomendado — com "px" aqui, título grande
+       ficaria com as linhas espremidas. */
     line-height: 1.6;
 }
-/* 3. Cabeçalho Principal */
-.cabecalho-principal {
-    text-align: center; /* Centraliza o texto */
-    padding: 4rem 1rem; /* Dá um respiro dentro da caixa (cima/baixo e lados) */
-    background-color: #080d0a; /* Um tom um pouco mais escuro que o body */
-    border-bottom: 3px solid #10b981; /* O verde vibrante simulando o corte de espada */
+
+
+/* =========================================
+   3. Menu fixo
+   ========================================= */
+
+.menu-navegacao {
+    /* sticky = rola junto até encostar no topo, aí gruda.
+       (fixed grudaria desde o início e deixaria um buraco no layout) */
+    position: sticky;
+    top: 0;
+
+    /* Sem z-index os cartões de projeto passam POR CIMA do menu ao rolar.
+       Já me pegou uma vez. */
+    z-index: 100;
+
+    display: flex;
+    justify-content: space-between; /* nome na esquerda, links na direita */
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;                /* no celular quebra linha em vez de espremer */
+
+    padding: 1rem 2rem;
+
+    /* O 0.85 de opacidade + blur dão o efeito de vidro fosco.
+       Se eu deixar opaco (sem rgba), perde a graça. */
+    background-color: rgba(8, 13, 10, 0.85);
+    backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid #233328;
 }
+
+.menu-logo {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.menu-lista {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.menu-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.3rem 0;
+
+    /* Borda transparente já reservando o espaço. Se ela só nascesse no hover,
+       o texto pularia 2px toda vez que o mouse passasse. */
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-link:hover {
+    color: #10b981;
+    border-bottom-color: #10b981;
+}
+
+/* Quem põe e tira essa classe "ativo" é o script.js, conforme a seção que
+   está na tela. Aqui eu só digo como ela fica.
+   Divisão: JS decide QUANDO, CSS decide COMO. Não misturar. */
+.menu-link.ativo {
+    color: #10b981;
+    border-bottom-color: #10b981;
+}
+
+
+/* =========================================
+   4. Foco pelo teclado
+   ========================================= */
+
+/* Link "pular para o conteúdo".
+   Fica escondido ACIMA da área visível (top negativo) em vez de display:none,
+   porque elemento com display:none não recebe foco — e aí o link nunca
+   apareceria pra quem precisa dele. Ao ganhar foco pelo Tab, desce pra tela. */
+.link-pular {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    z-index: 200; /* acima do menu, que é 100 */
+
+    background-color: #10b981;
+    color: #0c130e;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0 0 4px 0;
+
+    transition: top 0.2s ease;
+}
+
+/* Aqui é :focus mesmo, não :focus-visible — este link SÓ existe pro teclado. */
+.link-pular:focus {
+    top: 0;
+}
+
+/* Pra quem navega de Tab, sem mouse. O :focus-visible só aparece no teclado,
+   não no clique — por isso dá pra estilizar sem ficar feio.
+   Nunca usar "outline: none" sem colocar outro indicador no lugar. */
+.menu-link:focus-visible,
+.menu-logo:focus-visible,
+.botao-projeto:focus-visible,
+.link-rodape:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+
+/* =========================================
+   5. Cabeçalho
+   ========================================= */
+
+.cabecalho-principal {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: #080d0a;        /* mais escuro que o body, pra separar */
+    border-bottom: 3px solid #10b981; /* o verde imitando corte de espada */
+}
+
 .titulo-site {
-    color: #10b981; /* Verde destaque (cor do cabelo/ataques) */
-    font-size: 2.8rem;
+    color: #10b981;
+    font-size: 2.8rem; /* diminui no celular, lá na seção 14 */
     margin-bottom: 0.5rem;
 }
+
 .subtitulo-site {
-    color: #94a3b8; /* Cinza prateado imitando o aço das espadas */
+    color: #94a3b8; /* cinza prateado, tipo o aço das espadas */
     font-size: 1.2rem;
 }
-/* 4. Estrutura Central (Onde fica o Sobre Mim e os Projetos) */
-.conteudo-principal {
-    max-width: 1000px; /* Trava o crescimento do site em telas grandes */
-    margin: 0 auto; /* O segredo para centralizar: margem automática nas laterais */
-    padding: 3rem 2rem; /* Afasta o texto das bordas invisíveis da caixa */
+
+/* Botão de download do currículo. Aparece 2x: cabeçalho e seção de contato. */
+.botao-curriculo {
+    display: inline-block;
+    margin-top: 1.8rem;
+    padding: 0.7rem 1.5rem;
+
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-decoration: none;
+
+    color: #10b981;
+    background-color: transparent;
+    border: 1px solid #10b981;
+    border-radius: 4px;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
-/* Títulos das seções (Sobre Mim e Projetos) */
+
+/* No hover ele "enche": fundo verde, texto escuro. Contraste invertido. */
+.botao-curriculo:hover {
+    background-color: #10b981;
+    color: #0c130e;
+}
+
+.botao-curriculo:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+}
+
+/* Ícone de seta pra baixo, criado só com CSS (sem imagem, sem biblioteca).
+   Deixa claro que o link baixa um arquivo em vez de abrir uma página. */
+.botao-curriculo::before {
+    content: "↓";
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+/* Na seção de contato o botão fica logo abaixo de um parágrafo, então precisa
+   de menos espaço em cima e um pouco embaixo, antes do formulário. */
+.botao-curriculo-contato {
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+
+/* =========================================
+   6. Estrutura central e títulos
+   ========================================= */
+
+.conteudo-principal {
+    /* Trava a largura. Sem isso, em tela grande a linha de texto fica enorme
+       e o olho se perde ao pular pra linha de baixo. */
+    max-width: 1000px;
+
+    /* margin 0 auto = o jeito de centralizar bloco com largura definida.
+       O "auto" divide o espaço que sobra igual dos dois lados. */
+    margin: 0 auto;
+
+    padding: 3rem 2rem;
+}
+
 .titulo-secao {
     font-size: 2rem;
     color: #e2e8f0;
     margin-bottom: 1.5rem;
-    border-left: 4px solid #dc2626; /* Detalhe vermelho (Haramaki/faixa da cintura do Zoro) */
-    padding-left: 10px; /* Afasta o texto da barra vermelha */
+    border-left: 4px solid #dc2626; /* o vermelho do haramaki */
+    padding-left: 10px;
 }
+
+
 /* =========================================
-   5. MÁGICA DO GRID: A Seção de Projetos
+   7. Sobre Mim
    ========================================= */
 
-/* Remove a margem do texto 'Sobre Mim' para não grudar nos projetos */
 .secao-sobre {
     margin-bottom: 4rem;
 }
 
-/* O Container do Grid */
-.grade-projetos {
-    display: grid;
-    /* A regra de ouro: crie colunas de no mínimo 300px. 
-       Se houver espaço (como na sua TV), coloque lado a lado. 
-       Se não houver (como no celular), empilhe. */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem; /* Espaço entre os cartões */
-    list-style: none; /* Remove as bolinhas pretas da lista HTML */
-}
-
-/* 6. Estilo dos Cartões (Inspirado nas bainhas das espadas) */
-.cartao-projeto {
-    background-color: #151f18; /* Verde bem escuro, quase preto */
-    border: 1px solid #233328; /* Uma borda muito sutil para delimitar o cartão */
-    border-radius: 8px; /* Cantos levemente arredondados */
-    padding: 1.8rem;
-    
-    /* Prepara o cartão para ser animado quando o mouse passar por cima */
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* O efeito do "Corte da Espada" ao passar o mouse */
-.cartao-projeto:hover {
-    transform: translateY(-5px); /* Levanta o cartão para cima */
-    border-color: #10b981; /* A borda acende no verde vibrante */
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15); /* Cria uma sombra verde suave */
-}
-
-/* Textos dentro do cartão */
-.titulo-projeto {
-    color: #f8fafc;
-    font-size: 1.3rem;
+/* Isso aqui substitui o <br> que eu tinha no HTML.
+   Espaço entre parágrafos é aparência = CSS. */
+.texto-sobre p {
     margin-bottom: 1rem;
 }
 
-.descricao-projeto {
-    color: #94a3b8;
-    font-size: 1rem;
-}
-/* Estilo do Botão do Projeto */
-.botao-projeto {
-    display: inline-block; /* Permite colocar margens e preenchimentos ao redor do texto */
-    margin-top: 1.5rem; /* Empurra o botão um pouco para baixo, desgrudando do texto */
-    padding: 0.6rem 1.2rem; /* Cria o "corpo" do botão (espaço interno) */
-    
-    text-decoration: none; /* Remove aquele sublinhado feio padrão do link */
-    font-weight: bold; /* Deixa o texto em negrito */
-    
-    color: #10b981; /* O verde vibrante que escolhemos */
-    border: 1px solid #10b981; /* Cria a linha da borda do botão na mesma cor */
-    border-radius: 4px; /* Arredonda levemente as pontinhas do botão */
-}
-.rodape-principal {
-    text-align: center;
-    padding: 2rem 1rem;
-    background-color: #080d0a;
-    border-top: 3px solid #10b981;
-}
-.links-contato {
-    margin-top: 1rem;
-}
-.link-rodape {
-    margin: 0 0.5rem;      
-    display: inline-block;
-    color: #10b981; 
-    text-decoration: none; 
-}
-.link-rodape:hover {
-    text-decoration: underline;
-}
+
 /* =========================================
-   9. Seção de Habilidades
+   8. Experiência (linha do tempo)
    ========================================= */
+
+.secao-experiencia {
+    margin-bottom: 4rem;
+}
+
+.linha-tempo {
+    list-style: none;
+
+    /* A linha vertical contínua é só uma borda esquerda na <ol>.
+       Não precisa de imagem nem de pseudo-elemento pra isso. */
+    border-left: 2px solid #233328;
+    padding-left: 1.8rem;
+    margin-left: 0.5rem;
+}
+
+.item-tempo {
+    /* position relative pra bolinha (::before) se posicionar em relação
+       a ESTE item, e não à página inteira. */
+    position: relative;
+}
+
+/* Espaço entre um cargo e o próximo — mas não sobra depois do último. */
+.item-tempo:not(:last-child) {
+    margin-bottom: 2.5rem;
+}
+
+/* A bolinha em cima da linha. O left negativo a puxa pra fora do padding,
+   centralizando-a sobre a borda: metade da largura (11px/2) + metade da
+   borda (2px/2) além dos 1.8rem de padding-left. */
+.item-tempo::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.8rem - 6px);
+    top: 0.5rem;
+
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+
+    background-color: #0c130e; /* fundo da página, pra "furar" a linha */
+    border: 2px solid #10b981;
+}
+
+/* O cargo atual ganha bolinha preenchida, pra saltar aos olhos qual é o de hoje. */
+.item-tempo:first-child::before {
+    background-color: #10b981;
+}
+
+.cargo-tempo {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+}
+
+.empresa-tempo {
+    color: #10b981;
+    font-size: 0.95rem;
+}
+
+.periodo-tempo {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    margin-bottom: 0.7rem;
+}
+
+.descricao-tempo {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    max-width: 65ch; /* mesma trava de leitura dos cartões em destaque */
+}
+
+
+/* =========================================
+   9. Habilidades
+   ========================================= */
+
 .secao-habilidades {
     margin-bottom: 4rem;
 }
 
 .grade-habilidades {
     display: grid;
+    /* Mesma receita do grid de projetos (seção 9), só que com coluna menor,
+       porque cartão de habilidade tem bem menos texto. */
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
 .categoria-habilidade {
-    background-color: #0f1712; /* Fundo um pouco mais claro que o base */
+    background-color: #0f1712;
     border: 1px solid #18221b;
     border-radius: 8px;
     padding: 1.5rem;
@@ -148,21 +404,405 @@ body {
 }
 
 .lista-habilidades {
-    list-style: none; /* Tira as bolinhas */
+    list-style: none; /* tiro a bolinha padrão; faço a minha no ::before */
 }
 
 .lista-habilidades li {
     color: #94a3b8;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
+
+    /* O flex aqui é pra quando o item ocupa duas linhas: a segunda linha fica
+       alinhada com a primeira letra, e não embaixo do marcador. */
     display: flex;
-    align-items: flex-start; /* Alinha o texto com o bullet personalizado */
+    align-items: flex-start;
 }
 
-/* Adiciona um "bullet" personalizado com a cor do Zoro antes de cada item */
+/* ::before inventa um pedacinho antes do conteúdo, sem existir no HTML.
+   O "content" é obrigatório — sem ele nada aparece. */
 .lista-habilidades li::before {
     content: "▹";
-    color: #10b981; /* Verde vibrante */
+    color: #10b981;
     margin-right: 8px;
     font-weight: bold;
+}
+
+
+/* =========================================
+   10. Projetos
+   ========================================= */
+
+/* Mesmo respiro das outras seções, senão os projetos grudam no Contato. */
+.secao-projetos {
+    margin-bottom: 4rem;
+}
+
+.grade-projetos {
+    display: grid;
+
+    /* A linha mais importante do arquivo. Lendo de dentro pra fora:
+         minmax(300px, 1fr) -> coluna com no mínimo 300px, no máximo 1 fração
+                               do espaço livre
+         auto-fit           -> cria quantas colunas couberem
+       Resultado: 3 cartões lado a lado no monitor, 2 no tablet, 1 empilhado
+       no celular — TUDO SEM MEDIA QUERY. Não substituir isso por breakpoints
+       manuais, essa linha já resolve. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 2rem;
+    list-style: none; /* a grade é uma <ul> */
+}
+
+.cartao-projeto {
+    background-color: #151f18;
+    border: 1px solid #233328;
+    border-radius: 8px;
+    padding: 1.8rem;
+
+    /* A transition fica AQUI, no estado normal, e não no :hover.
+       Assim a animação vale nos dois sentidos: ao entrar e ao sair o mouse.
+       Se eu mover pro :hover, a saída fica seca. */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cartao-projeto:hover {
+    /* Y negativo sobe (o eixo cresce pra baixo na tela).
+       Uso transform e não margin porque transform roda na placa de vídeo,
+       sem forçar o navegador a recalcular o layout inteiro. Fica bem mais fluido. */
+    transform: translateY(-5px);
+
+    border-color: #10b981;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+.titulo-projeto {
+    color: #f8fafc;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.descricao-projeto {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+/* ---- Cartões em destaque (os 2 primeiros) ----
+   Ficam no topo ocupando a largura inteira, os outros 4 seguem na grade normal.
+   Pra promover/rebaixar um projeto: só adicionar ou tirar a classe
+   "cartao-destaque" no <li> do HTML. Nada mais precisa mudar. */
+.cartao-destaque {
+    /* "1 / -1" = da primeira até a ÚLTIMA linha de coluna da grade, seja
+       quantas forem. Como o auto-fit muda o número de colunas conforme a tela,
+       não dá pra fixar um número aqui — o -1 resolve sozinho. */
+    grid-column: 1 / -1;
+
+    border-color: #2d5c46;  /* borda mais viva que a dos cartões normais */
+    padding: 2.2rem;        /* mais respiro interno = parece mais importante */
+}
+
+.selo-destaque {
+    display: inline-block;
+    margin-bottom: 0.9rem;
+
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;  /* espaçar letras dá ar de etiqueta, não de frase */
+    text-transform: uppercase;
+
+    color: #10b981;
+    /* Verde com 12% de opacidade: fundo colorido sem brigar com o texto branco. */
+    background-color: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+}
+
+/* O título do destaque cresce, pra hierarquia ficar óbvia à distância. */
+.cartao-destaque .titulo-projeto {
+    font-size: 1.6rem;
+}
+
+.cartao-destaque .descricao-projeto {
+    /* Limita a linha mesmo o cartão sendo largo. Sem isso, no monitor grande
+       o texto atravessa 1000px e fica cansativo de ler. */
+    max-width: 65ch;
+}
+
+/* Chips de tecnologia. Ficam entre a descrição e o botão.
+   O flex-wrap é essencial: com muitas tags elas quebram pra linha de baixo
+   em vez de estourar a largura do cartão. */
+.tags-projeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+    margin-top: 1.2rem;
+}
+
+.tags-projeto li {
+    font-size: 0.75rem;
+    /* Fonte monoespaçada dá cara de "termo técnico" e separa visualmente
+       das frases da descrição. */
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    color: #94a3b8;
+
+    background-color: #0c130e; /* mesmo fundo da página: o chip "afunda" no cartão */
+    border: 1px solid #233328;
+    border-radius: 999px;      /* valor exagerado = pílula perfeita em qualquer altura */
+    padding: 0.25rem 0.7rem;
+
+    /* white-space nowrap pra tag de duas palavras ("Em produção") não quebrar
+       no meio e virar duas linhas dentro da pílula. */
+    white-space: nowrap;
+}
+
+.botao-projeto {
+    /* Link é inline por natureza e ignora largura/altura/margem vertical.
+       inline-block mantém ele na linha mas deixa eu dar tamanho — é o que
+       transforma link em botão. */
+    display: inline-block;
+
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    color: #10b981;
+    border: 1px solid #10b981;
+    border-radius: 4px;
+}
+
+
+/* =========================================
+   11. Contato
+   ========================================= */
+
+.secao-contato {
+    margin-bottom: 2rem;
+}
+
+.texto-contato {
+    color: #94a3b8;
+    margin-bottom: 2rem;
+    max-width: 55ch;
+}
+
+.formulario-contato {
+    /* Flex em coluna com gap: espaça os campos sem eu ter que ficar
+       colocando margin-bottom em cada um. */
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 600px; /* form largo demais fica desconfortável de preencher */
+}
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.campo-formulario label {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    font-weight: bold;
+}
+
+.campo-formulario input,
+.campo-formulario textarea {
+    /* Campo de formulário NÃO herda fonte do body por padrão — vem com a fonte
+       feia do sistema. Esse "inherit" é obrigatório, senão destoa do resto. */
+    font-family: inherit;
+    font-size: 1rem;
+
+    color: #e2e8f0;
+    background-color: #0f1712;
+    border: 1px solid #233328;
+    border-radius: 6px;
+    padding: 0.7rem 0.9rem;
+
+    transition: border-color 0.2s ease;
+}
+
+.campo-formulario textarea {
+    /* Só deixo esticar na vertical. O "both" (padrão) permite arrastar pros
+       lados e estourar o layout do site. */
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Estado de foco: quando estou digitando naquele campo */
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+    outline: none; /* removo o padrão SÓ porque coloco a borda verde no lugar */
+    border-color: #10b981;
+}
+
+/* Vermelho quando o navegador reprova o valor (e-mail sem @, por exemplo).
+   ATENÇÃO ao seletor: é :user-invalid, NÃO :invalid.
+   O :invalid pega campo obrigatório vazio já no carregamento da página — o
+   formulário nasceria todo vermelho antes da pessoa digitar qualquer coisa.
+   O :user-invalid só entra depois que a pessoa mexeu no campo e saiu dele.
+   Navegador antigo simplesmente ignora a regra: perde o vermelho, mas a
+   validação continua funcionando normal. */
+.campo-formulario input:user-invalid,
+.campo-formulario textarea:user-invalid {
+    border-color: #dc2626;
+}
+
+/* A armadilha antispam. Escondo sem usar display:none, porque alguns robôs
+   ignoram campo com display:none — assim ele continua "existindo" pra eles. */
+.campo-armadilha {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.botao-enviar {
+    align-self: flex-start; /* não estica o botão na largura toda do form */
+
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: #0c130e;            /* texto escuro sobre fundo verde = bom contraste */
+    background-color: #10b981;
+    border: 1px solid #10b981;
+    border-radius: 4px;
+    padding: 0.7rem 1.6rem;
+    cursor: pointer;           /* botão <button> não vira mãozinha sozinho */
+
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.botao-enviar:hover {
+    background-color: #0ea472;
+}
+
+.botao-enviar:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+}
+
+/* Enquanto está enviando, o JS desabilita o botão. Sem esse estado visual a
+   pessoa acha que não funcionou e clica de novo, mandando duas mensagens. */
+.botao-enviar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Mensagem de retorno. Nasce vazia e sem ocupar espaço; o JS põe o texto
+   e uma das classes de estado abaixo. */
+.retorno-formulario {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.retorno-formulario.sucesso {
+    color: #10b981;
+}
+
+.retorno-formulario.erro {
+    color: #dc2626;
+}
+
+
+/* =========================================
+   12. Rodapé
+   ========================================= */
+
+.rodape-principal {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #080d0a;
+    border-top: 3px solid #10b981; /* espelha a borda do cabeçalho, fecha o site */
+}
+
+.links-contato {
+    margin-top: 1rem;
+}
+
+.link-rodape {
+    margin: 0 0.5rem;
+    display: inline-block;
+    color: #10b981;
+    text-decoration: none;
+}
+
+.link-rodape:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   13. Animação de revelação no scroll
+   ========================================= */
+
+/* CUIDADO AO MEXER AQUI.
+   A classe "revelar" é aplicada pelo script.js, NUNCA escrita no HTML.
+   Motivo: ela deixa o elemento invisível (opacity: 0). Se estivesse no HTML e
+   o JS falhasse ou não carregasse, o site inteiro ficaria em branco.
+   Do jeito atual, sem JS nada recebe a classe e tudo aparece normal. */
+.revelar {
+    opacity: 0;
+    transform: translateY(20px); /* começa 20px mais baixo e sobe */
+
+    /* Animo só opacity e transform de propósito: são as duas propriedades que
+       a placa de vídeo resolve sozinha, sem obrigar o navegador a recalcular
+       o layout da página. Animar height, top ou margin engasga. */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* O JS adiciona "visivel" quando o elemento entra na tela. */
+.revelar.visivel {
+    opacity: 1;
+    transform: none;
+}
+
+/* Se a pessoa pediu menos movimento no sistema, a animação inteira é
+   desligada — mesmo que o JS já tenha posto as classes, isto vence. */
+@media (prefers-reduced-motion: reduce) {
+    .revelar,
+    .revelar.visivel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/* =========================================
+   14. Telas pequenas
+   ========================================= */
+
+/* As grades já se viram sozinhas (auto-fit), mas tamanho de fonte fixo não.
+   2.8rem é bom no notebook e exagerado no celular.
+   max-width: 600px = aplica quando a tela tiver 600px OU MENOS. */
+@media (max-width: 600px) {
+    .titulo-site {
+        font-size: 2rem;
+    }
+
+    .subtitulo-site {
+        font-size: 1rem;
+    }
+
+    .titulo-secao {
+        font-size: 1.5rem;
+    }
+
+    .conteudo-principal {
+        padding: 2rem 1rem;
+    }
+
+    .menu-navegacao {
+        padding: 0.8rem 1rem;
+    }
+
+    .menu-lista {
+        gap: 1rem; /* aperta pros 3 links caberem sem quebrar linha */
+    }
 }

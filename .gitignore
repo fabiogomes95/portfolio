@@ -1,0 +1,15 @@
+# Lixo de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Configuração local do Claude Code — é pessoal minha, não do projeto
+.claude/settings.local.json
+
+# Pastas de editor
+.vscode/
+.idea/
+
+# Arquivos temporários de export que caem aqui sem querer
+Profile*.pdf

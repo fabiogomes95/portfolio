@@ -3,39 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio | Fabio Gomes</title>
+    <title>Fábio Gomes | Desenvolvedor Python & Automação</title>
+
+    <!-- Esse texto é o que o Google mostra embaixo do título nos resultados.
+         Se eu mudar de foco profissional, atualizar aqui E no og:description. -->
+    <meta name="description" content="Portfólio de Fábio Gomes — desenvolvedor focado em automação com Python, sistemas internos e digitalização de processos hospitalares. Projetos em FastAPI, React, PostgreSQL e Docker.">
+    <meta name="author" content="Fábio Gomes">
+
+    <!-- Open Graph = o card que aparece quando eu colo o link no LinkedIn/WhatsApp.
+         Sem isso vira um retângulo cinza sem graça. -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fábio Gomes | Desenvolvedor Python & Automação">
+    <meta property="og:description" content="Automação com Python, sistemas internos e digitalização de processos hospitalares. Veja os projetos que já estão em produção.">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://fabiogomes95.github.io/portfolio/">
+
+    <!-- Banner do card de preview. A URL TEM que ser completa (https://...) —
+         caminho relativo os robôs do LinkedIn/WhatsApp ignoram.
+         O arquivo fica na raiz do repositório; se eu renomear, mudar aqui também.
+         Dimensão certa é 1200x630. -->
+    <meta property="og:image" content="https://fabiogomes95.github.io/portfolio/og-banner-1200x630.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Banner do portfólio de Fábio Gomes — Desenvolvedor Python & Automação">
+
+    <!-- Marca qual é o endereço oficial, pro Google não indexar duas vezes
+         caso o site fique acessível por mais de uma URL. -->
+    <link rel="canonical" href="https://fabiogomes95.github.io/portfolio/">
+
+    <!-- O Twitter/X lê as og: de cima, mas exige esse tipo declarado à parte. -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon feito em SVG na própria linha, sem arquivo separado.
+         Os %23 são "#" escapado — dentro de uma URL o # tem outro significado
+         e quebra tudo. Se um dia eu trocar as cores do tema, mudar aqui também. -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080d0a'/><text y='.9em' x='50' font-size='70' text-anchor='middle' fill='%2310b981' font-family='sans-serif' font-weight='bold'>F</text></svg>">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Cabeçalho do site -->
-    <header class="cabecalho-principal">
-        <h1 class="titulo-site">Meu Portfólio</h1>
-        <p class="subtitulo-site">Bem-vindo ao meu portfólio!</p>
+    <!-- Link de pular navegação. Tem que ser o PRIMEIRO elemento do body.
+         Fica escondido acima da tela e só aparece quando recebe foco pelo Tab.
+         Serve pra quem navega por teclado não ter que passar pelo menu inteiro
+         em toda visita pra chegar no conteúdo. -->
+    <a href="#conteudo" class="link-pular">Pular para o conteúdo</a>
+
+    <!-- Menu. Fica antes do header porque gruda no topo da tela.
+         Cada link aponta pro id de uma seção (#sobre -> id="sobre") — isso é
+         nativo do navegador, não precisa de JS.
+         REGRA: se eu criar uma seção nova, tenho que colocar o id nela E o
+         link aqui. O script.js pega os links daqui automaticamente, então
+         essas duas coisas bastam. -->
+    <nav class="menu-navegacao">
+        <!-- Meu nome como logo: clicar volta pro topo -->
+        <a href="#topo" class="menu-logo">Fábio Gomes</a>
+
+        <ul class="menu-lista">
+            <li><a href="#sobre"       class="menu-link">Sobre</a></li>
+            <li><a href="#experiencia" class="menu-link">Experiência</a></li>
+            <li><a href="#habilidades" class="menu-link">Habilidades</a></li>
+            <li><a href="#projetos"    class="menu-link">Projetos</a></li>
+            <li><a href="#contato"     class="menu-link">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- O id="topo" existe só pro link do logo ter pra onde voltar. -->
+    <header class="cabecalho-principal" id="topo">
+        <!-- Só um <h1> na página inteira, e é o texto de MAIOR peso pro Google.
+             Não desperdiçar com "Meu Portfólio" (que era o que estava aqui):
+             tem que dizer quem eu sou e o que eu faço, batendo com o <title>,
+             com a og:title e com o meu título do LinkedIn. -->
+        <h1 class="titulo-site">Fábio Gomes</h1>
+        <p class="subtitulo-site">Desenvolvedor Python &amp; Automação — sistemas internos em produção</p>
+
+        <!-- O atributo "download" força o navegador a BAIXAR o PDF em vez de
+             abrir numa aba. Sem ele, o arquivo abre no leitor do navegador e a
+             pessoa tem que salvar na mão.
+             Caminho relativo funciona aqui (é o meu próprio site) — diferente
+             da og:image, que exige URL completa.
+             Pra trocar o currículo depois: substituir o arquivo mantendo o mesmo
+             nome, que aí nada aqui precisa mudar. -->
+        <a href="curriculo-fabio-gomes.pdf" download class="botao-curriculo">
+            Baixar currículo (PDF)
+        </a>
     </header>
 
-    <!-- Conteúdo principal da página -->
-    <main class="conteudo-principal">
-        
-    <!-- Seção Sobre -->
+    <!-- O id="conteudo" é o destino do link "pular para o conteúdo" lá em cima. -->
+    <main class="conteudo-principal" id="conteudo">
+
         <section id="sobre" class="secao-sobre">
             <h2 class="titulo-secao">Sobre Mim</h2>
+
             <div class="texto-sobre">
+                <!-- Ordem importa: primeiro o que eu FAÇO, depois a formação.
+                     Antes começava por "sou estudante de ADS", que é a informação
+                     mais fraca da frase ocupando o lugar mais forte. -->
                 <p>
-                    Meu nome é Fábio Gomes. Sou estudante de Análise e Desenvolvimento de Sistemas e profissional de TI com foco em automação operacional, sistemas internos e digitalização de processos hospitalares.
+                    Meu nome é Fábio Gomes. Trabalho com automação operacional, sistemas internos e digitalização de processos hospitalares — e sou estudante de Análise e Desenvolvimento de Sistemas.
                 </p>
-                <br> <!-- Dá um pequeno espaço extra entre os parágrafos -->
+                <!-- Tinha um <br> aqui pra separar os parágrafos. Tirei: espaçamento
+                     é trabalho do CSS. Quem separa agora é ".texto-sobre p" no style.css.
+                     Se eu quiser mudar esse respiro, é lá, não aqui. -->
                 <p>
                     Atuando no Hospital Pres. Café Filho, em Extremoz/RN, comecei desenvolvendo automações em Python para o faturamento do SUS e criando aplicações web práticas. Aqui você encontra os projetos que tirei do papel e que já estão em produção, além de alguns projetos pessoais que ainda estão em desenvolvimento.
                 </p>
             </div>
         </section>
-        <!-- Seção de Habilidades -->
+
+        <!-- Seção nova. Motivo de existir: os projetos mostram o que eu sei fazer,
+             mas não diziam em lugar nenhum que eu faço isso EMPREGADO, hoje.
+             Sistema rodando num hospital com equipe dependendo dele pesa
+             diferente de repositório no GitHub.
+             Deixei a Teleperformance de fora de propósito — está no currículo
+             pra não abrir buraco de data, mas aqui não acrescenta nada. -->
+        <section id="experiencia" class="secao-experiencia">
+            <h2 class="titulo-secao">Experiência</h2>
+
+            <ol class="linha-tempo">
+                <li class="item-tempo">
+                    <h3 class="cargo-tempo">Supervisor de Setor de Informática e Tecnologia</h3>
+                    <p class="empresa-tempo">Prefeitura Municipal de Extremoz — Extremoz/RN</p>
+                    <p class="periodo-tempo">maio de 2025 — atual</p>
+                    <p class="descricao-tempo">
+                        Responsável pelo sistema interno do Hospital Municipal Pres. Café Filho
+                        e pelo faturamento ambulatorial junto ao SUS. Desenvolvo e mantenho em
+                        produção o sistema de automação hospitalar — recepção digital, painel
+                        gerencial em tempo real e geração do BPA/SUS — e automatizo em Python
+                        rotinas que antes dependiam de planilha e digitação manual.
+                    </p>
+                </li>
+
+                <li class="item-tempo">
+                    <h3 class="cargo-tempo">Técnico de Manutenção e Suporte em Informática</h3>
+                    <p class="empresa-tempo">Prefeitura Municipal de Extremoz — Extremoz/RN</p>
+                    <p class="periodo-tempo">março de 2021 — abril de 2025</p>
+                    <p class="descricao-tempo">
+                        Suporte técnico e infraestrutura nas unidades da prefeitura: manutenção
+                        e configuração de estações de trabalho, instalação e manutenção de redes
+                        locais e atendimento ao usuário nas demandas técnicas do dia a dia.
+                    </p>
+                </li>
+            </ol>
+        </section>
+
         <section id="habilidades" class="secao-habilidades">
             <h2 class="titulo-secao">Habilidades e Ferramentas</h2>
-            
+
+            <!-- Essa div é o container da grade. O CSS transforma ELA em grid
+                 e cada filho direto vira uma célula sozinho.
+                 Pra somar uma categoria: copiar um bloco inteiro abaixo. O grid
+                 se reorganiza sozinho, não preciso mexer em CSS nenhum. -->
             <div class="grade-habilidades">
-                <!-- Categoria 1 -->
+                <!-- Categoria 1 — as outras seguem o mesmo molde: h3 + ul -->
                 <div class="categoria-habilidade">
                     <h3 class="titulo-categoria">Back-end & Lógica</h3>
                     <ul class="lista-habilidades">
@@ -65,7 +185,7 @@
                     </ul>
                 </div>
 
-                <!-- Categoria 4 (O seu diferencial) -->
+                <!-- Categoria 4 — meu diferencial, manter em destaque -->
                 <div class="categoria-habilidade">
                     <h3 class="titulo-categoria">AI Coding & Workflow</h3>
                     <ul class="lista-habilidades">
@@ -77,89 +197,202 @@
             </div>
         </section>
 
-        <!-- Seção de Projetos -->
         <section id="projetos" class="secao-projetos">
             <h2 class="titulo-secao">Projetos</h2>
-            
+
+            <!-- Usei <ul> e não um monte de <div> porque isso É uma lista de
+                 itens equivalentes. Leitor de tela anuncia "lista com 6 itens".
+                 Visualmente não muda nada: o CSS vira grid e tira as bolinhas. -->
             <ul class="grade-projetos">
-                <!-- Projeto 1 -->
-                <li class="cartao-projeto">
+                <!-- Molde do cartão: h3 + p + link. Copiar um bloco desses
+                     pra adicionar projeto novo. -->
+                <li class="cartao-projeto cartao-destaque">
+                    <span class="selo-destaque">Em produção</span>
                     <h3 class="titulo-projeto">HMPCF Automation System</h3>
                     <p class="descricao-projeto">
-                        Sistema de automação hospitalar para recepção digital, painel gerencial 
-                        em tempo real e faturamento BPA/SUS. Desenvolvido para o Hospital Municipal 
+                        Sistema de automação hospitalar para recepção digital, painel gerencial
+                        em tempo real e faturamento BPA/SUS. Desenvolvido para o Hospital Municipal
                         Pres. Café Filho — Extremoz/RN, Brasil.
                     </p>
-                    <a href="https://github.com/fabiogomes95/HMPCF-Automation-System" target="_blank" class="botao-projeto" >Ver no GitHub</a>
+                    <!-- CONFERIR: chutei a stack pela minha descrição, não tinha
+                         escrito no texto. Corrigir se estiver errado. -->
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>Automação</li>
+                        <li>BPA/SUS</li>
+                    </ul>
+                    <!-- Todo link externo leva target="_blank" + rel="noopener noreferrer".
+                         O rel é trava de segurança: sem ele a página aberta consegue
+                         mexer na minha aba original (window.opener). Não esquecer
+                         nos próximos que eu adicionar. -->
+                    <a href="https://github.com/fabiogomes95/HMPCF-Automation-System" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
 
-                <!-- Projeto 2 -->
-                <li class="cartao-projeto">
+                <li class="cartao-projeto cartao-destaque">
+                    <span class="selo-destaque">Projeto principal</span>
                     <h3 class="titulo-projeto">BarrioERP — Sistema SaaS Multi-tenant</h3>
                     <p class="descricao-projeto">
-                        ERP completo para gestão de restaurantes com isolamento de dados (multi-tenancy). 
-                        Backend assíncrono em FastAPI e PostgreSQL, front-end em React, operando com Docker. 
-                        Implementa controle de acesso por papéis (RBAC) e optimistic locking para garantir 
+                        ERP completo para gestão de restaurantes com isolamento de dados (multi-tenancy).
+                        Backend assíncrono em FastAPI e PostgreSQL, front-end em React, operando com Docker.
+                        Implementa controle de acesso por papéis (RBAC) e optimistic locking para garantir
                         a integridade financeira das comandas.
                     </p>
-                    <a href="https://github.com/fabiogomes95/BarrioERP" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                    <ul class="tags-projeto">
+                        <li>FastAPI</li>
+                        <li>PostgreSQL</li>
+                        <li>React</li>
+                        <li>Docker</li>
+                        <li>Multi-tenant</li>
+                        <li>RBAC</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/BarrioERP" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
 
-                <!-- Projeto 3 -->
                 <li class="cartao-projeto">
                     <h3 class="titulo-projeto">Análise Preditiva de Evasão Acadêmica</h3>
                     <p class="descricao-projeto">
-                        Projeto de Ciência de Dados focado na identificação de padrões de abandono universitário. 
-                        Atuei na engenharia de dados, realizando a extração, limpeza e tratamento da base 
+                        Projeto de Ciência de Dados focado na identificação de padrões de abandono universitário.
+                        Atuei na engenharia de dados, realizando a extração, limpeza e tratamento da base
                         com Python e Pandas para alimentar um dashboard interativo em Streamlit.
                     </p>
-                    <a href="https://github.com/Senac-EAD-PTI-Grupo/senac-pi-grupo03-2026" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>Pandas</li>
+                        <li>Streamlit</li>
+                        <li>Ciência de Dados</li>
+                    </ul>
+                    <a href="https://github.com/Senac-EAD-PTI-Grupo/senac-pi-grupo03-2026" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
 
-                <!-- Projeto 4 -->
                 <li class="cartao-projeto">
                     <h3 class="titulo-projeto">Sheet2Zap MVP</h3>
                     <p class="descricao-projeto">
-                        Lê os produtos de uma planilha do Google Sheets e finaliza o pedido enviando 
-                        um resumo formatado para o WhatsApp da lojista. Sem banco de dados, sem painel 
+                        Lê os produtos de uma planilha do Google Sheets e finaliza o pedido enviando
+                        um resumo formatado para o WhatsApp da lojista. Sem banco de dados, sem painel
                         admin, sem gateway de pagamento.
                     </p>
-                    <a href="https://github.com/fabiogomes95/Sheet2Zap-MVP" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                    <!-- CONFERIR: a descrição não diz a linguagem. Ajustar se não for Python. -->
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>Google Sheets API</li>
+                        <li>WhatsApp</li>
+                        <li>MVP</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/Sheet2Zap-MVP" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
 
-                <!-- Projeto 5 -->
                 <li class="cartao-projeto">
                     <h3 class="titulo-projeto">Sanji.Fit - Landing Page Responsiva</h3>
                     <p class="descricao-projeto">
-                        Página de vendas desenvolvida como projeto de estudos prático da disciplina de desenvolvimento web, para captação de alunos 
-                        desenvolvida com marcação semântica e CSS puro. Layout focado em conversão, responsividade via Flexbox e animações nativas, 
+                        Página de vendas desenvolvida como projeto de estudos prático da disciplina de desenvolvimento web, para captação de alunos
+                        desenvolvida com marcação semântica e CSS puro. Layout focado em conversão, responsividade via Flexbox e animações nativas,
                         sem uso de bibliotecas ou frameworks.
                     </p>
-                    <a href="https://github.com/fabiogomes95/landing-page-sanji-fit" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                    <ul class="tags-projeto">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>Flexbox</li>
+                        <li>Responsivo</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/landing-page-sanji-fit" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
-                <!-- Projeto 6 -->
+
                 <li class="cartao-projeto">
                     <h3 class="titulo-projeto">Controle de Estoque CLI (Python)</h3>
                     <p class="descricao-projeto">
-                        Projeto prático de estruturação de dados. Um sistema de console que utiliza dicionários e funções modulares para cadastrar itens, 
+                        Projeto prático de estruturação de dados. Um sistema de console que utiliza dicionários e funções modulares para cadastrar itens,
                         validar entradas de usuário e calcular o total armazenado.
                     </p>
-                    <a href="https://github.com/fabiogomes95/pti-controle-de-estoque" target="_blank" class="botao-projeto">Ver no GitHub</a>
+                    <ul class="tags-projeto">
+                        <li>Python</li>
+                        <li>CLI</li>
+                        <li>Estrutura de Dados</li>
+                    </ul>
+                    <a href="https://github.com/fabiogomes95/pti-controle-de-estoque" target="_blank" rel="noopener noreferrer" class="botao-projeto">Ver no GitHub</a>
                 </li>
             </ul>
         </section>
 
+        <section id="contato" class="secao-contato">
+            <h2 class="titulo-secao">Contato</h2>
+            <p class="texto-contato">
+                Aberto a oportunidades em Python, automação e sistemas internos.
+                Manda uma mensagem que eu respondo.
+            </p>
+
+            <!-- Segunda chance de baixar o currículo: quem rolou até aqui está
+                 interessado, e nem todo mundo viu o botão lá no topo. -->
+            <a href="curriculo-fabio-gomes.pdf" download class="botao-curriculo botao-curriculo-contato">
+                Baixar currículo (PDF)
+            </a>
+
+            <!--
+                O action aponta pro Formspree (site estático não processa envio sozinho).
+                Se eu trocar de conta/formulário, é só mudar o ID no final da URL.
+
+                Importante: este form funciona SEM JavaScript. O navegador envia
+                sozinho e o Formspree mostra a página de obrigado dele.
+                O script.js só melhora isso: intercepta o envio e mostra o retorno
+                aqui mesmo, sem sair do site. Se o JS quebrar, o form continua vivo.
+            -->
+            <form class="formulario-contato" id="formulario-contato"
+                  action="https://formspree.io/f/mvkoqzdr" method="POST">
+
+                <div class="campo-formulario">
+                    <!-- O "for" do label tem que bater com o "id" do input.
+                         É isso que faz clicar no texto focar o campo, e é assim
+                         que leitor de tela sabe qual rótulo é de qual campo. -->
+                    <label for="campo-nome">Nome</label>
+                    <input type="text" id="campo-nome" name="nome" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-email">E-mail</label>
+                    <!-- type="email" faz o navegador validar o formato sozinho e
+                         abre o teclado com @ no celular.
+                         O name="email" o Formspree reconhece e usa como Responder-Para,
+                         então eu respondo direto na minha caixa. Não renomear. -->
+                    <input type="email" id="campo-email" name="email" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-mensagem">Mensagem</label>
+                    <textarea id="campo-mensagem" name="mensagem" rows="6" required></textarea>
+                </div>
+
+                <!-- Assunto do e-mail que chega pra mim. Sem isso vem um genérico. -->
+                <input type="hidden" name="_subject" value="Novo contato pelo portfólio">
+
+                <!-- Armadilha antispam ("honeypot"): campo escondido por CSS.
+                     Humano não vê, então nunca preenche. Robô de spam preenche
+                     tudo que encontra — e aí o Formspree descarta o envio.
+                     O nome _gotcha é reconhecido por eles, não inventar outro. -->
+                <input type="text" name="_gotcha" class="campo-armadilha" tabindex="-1" autocomplete="off">
+
+                <button type="submit" class="botao-enviar">Enviar mensagem</button>
+
+                <!-- role="status" faz o leitor de tela anunciar o texto quando ele
+                     muda, sem roubar o foco de onde a pessoa está. -->
+                <p class="retorno-formulario" id="retorno-formulario" role="status"></p>
+            </form>
+        </section>
+
     </main>
-    <!-- Rodapé do Site -->
+
     <footer class="rodape-principal">
         <p>Desenvolvido por Fábio Gomes.</p>
         <div class="links-contato">
-            <!-- Substitua o # pelo link do seu perfil -->
-            <a href="https://github.com/fabiogomes95" target="_blank" class="link-rodape">GitHub</a>
-            <a href="https://www.linkedin.com/in/fabiogsilva95/" target="_blank" class="link-rodape">LinkedIn</a>
-            <a href="mailto:fabigsilva@disroot.org" target="_blank" class="link-rodape">E-mail</a>
+            <a href="https://github.com/fabiogomes95" target="_blank" rel="noopener noreferrer" class="link-rodape">GitHub</a>
+            <a href="https://www.linkedin.com/in/fabiogsilva95/" target="_blank" rel="noopener noreferrer" class="link-rodape">LinkedIn</a>
+            <!-- mailto não leva target="_blank" — só abriria uma aba em branco à toa. -->
+            <a href="mailto:fabiogsilva@disroot.org" class="link-rodape">E-mail</a>
         </div>
     </footer>
+
+    <!-- "defer" = baixa o script junto com o HTML mas só roda no fim.
+         Sem ele o JS rodaria antes das seções existirem e não acharia nada.
+         Se eu adicionar outro script, manter o defer também. -->
+    <script src="script.js" defer></script>
 
 </body>
 </html>
