@@ -99,6 +99,59 @@ secoes.forEach(function (secao) {
 
 
 /* -------------------------------------------------------------------------
+   3b. Altura do menu -> espaço reservado na rolagem
+   -------------------------------------------------------------------------
+   O CSS tem scroll-padding-top fixo (5rem no desktop, 8rem no celular), mas
+   isso é chute: a altura real do menu muda conforme os links quebram linha.
+   Quando eu errava pra menos, o título da seção parava CORTADO atrás do menu.
+
+   Aqui eu meço a altura de verdade e sobrescrevo. Assim funciona em qualquer
+   largura de tela, e continua certo se eu adicionar links no menu depois.
+   ------------------------------------------------------------------------- */
+
+const menu = document.querySelector(".menu-navegacao");
+
+function ajustarEspacoDaRolagem() {
+    if (!menu) {
+        return;
+    }
+    // offsetHeight = altura real renderizada, em pixels, já com padding e borda.
+    // Somo 16px de folga pra o título não encostar na borda do menu.
+    document.documentElement.style.scrollPaddingTop = (menu.offsetHeight + 16) + "px";
+}
+
+ajustarEspacoDaRolagem();
+
+// Recalcula ao girar o celular ou redimensionar a janela — nesses momentos o
+// menu pode passar de uma linha pra duas, mudando de altura.
+window.addEventListener("resize", ajustarEspacoDaRolagem);
+
+
+/* -------------------------------------------------------------------------
+   3c. Botão "voltar ao topo"
+   -------------------------------------------------------------------------
+   O botão nasce visível no CSS e o JS adiciona a classe "oculto" quando o
+   cabeçalho está na tela — porque ali ele não teria função nenhuma.
+   Mesma proteção da animação: se este trecho falhar, o botão apenas fica
+   sempre visível. Como é um <a href="#topo">, continua funcionando.
+   ------------------------------------------------------------------------- */
+
+const botaoTopo = document.getElementById("botao-topo");
+const cabecalho = document.getElementById("topo");
+
+if (botaoTopo && cabecalho) {
+    const observadorTopo = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+            // Cabeçalho visível -> estou no topo -> esconde o botão.
+            botaoTopo.classList.toggle("oculto", entrada.isIntersecting);
+        });
+    });
+
+    observadorTopo.observe(cabecalho);
+}
+
+
+/* -------------------------------------------------------------------------
    4. Revelação dos elementos ao rolar
    -------------------------------------------------------------------------
    Mesma ferramenta da seção 3 (IntersectionObserver), outro uso: em vez de

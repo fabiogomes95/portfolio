@@ -19,8 +19,9 @@
     10. Projetos
     11. Contato
     12. Rodapé
-    13. Animação de revelação no scroll
-    14. Telas pequenas
+    13. Botão "voltar ao topo"
+    14. Animação de revelação no scroll
+    15. Telas pequenas
    ========================================================================= */
 
 
@@ -117,7 +118,11 @@ body {
 
 .menu-lista {
     display: flex;
-    gap: 1.5rem;
+    /* Sem este wrap os links estouram a tela no celular em vez de quebrar
+       linha. Foi o que cortou o "Contato" quando o menu foi pra 5 itens. */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem; /* 0.5rem entre linhas, 1.5rem entre os links */
     list-style: none;
 }
 
@@ -202,7 +207,7 @@ body {
 
 .titulo-site {
     color: #10b981;
-    font-size: 2.8rem; /* diminui no celular, lá na seção 14 */
+    font-size: 2.8rem; /* diminui no celular, lá na seção 15 */
     margin-bottom: 0.5rem;
 }
 
@@ -738,7 +743,68 @@ body {
 
 
 /* =========================================
-   13. Animação de revelação no scroll
+   13. Botão "voltar ao topo"
+   ========================================= */
+
+/* position: fixed gruda na janela e não rola com a página — diferente do
+   sticky do menu, que faz parte do fluxo. */
+.botao-topo {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 150; /* acima do conteúdo, abaixo do link de pular (200) */
+
+    /* Flex só pra centralizar a setinha dentro do círculo, na horizontal
+       e na vertical. É a forma mais confiável de centrar um caractere. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    border-radius: 50%; /* 50% em elemento quadrado = círculo */
+
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1;
+    text-decoration: none;
+
+    color: #0c130e;
+    background-color: #10b981;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+
+.botao-topo:hover {
+    background-color: #0ea472;
+}
+
+.botao-topo:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 3px;
+}
+
+/* MESMA LÓGICA da classe "revelar": quem esconde é o JS, não o HTML.
+   O botão nasce VISÍVEL e o script adiciona "oculto" quando estou no topo
+   da página (onde ele não teria função). Se o JS falhar, o botão só fica
+   sempre visível — continua funcionando, porque é um link comum pra #topo. */
+.botao-topo.oculto {
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none; /* não intercepta cliques enquanto invisível */
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .botao-topo {
+        transition: none;
+    }
+}
+
+
+/* =========================================
+   14. Animação de revelação no scroll
    ========================================= */
 
 /* CUIDADO AO MEXER AQUI.
@@ -775,7 +841,7 @@ body {
 
 
 /* =========================================
-   14. Telas pequenas
+   15. Telas pequenas
    ========================================= */
 
 /* As grades já se viram sozinhas (auto-fit), mas tamanho de fonte fixo não.
@@ -798,11 +864,38 @@ body {
         padding: 2rem 1rem;
     }
 
+    /* No celular o menu vira coluna: nome em cima, links embaixo, tudo
+       centralizado. Tentar manter lado a lado com 5 links espremia tudo
+       e cortava o "Contato" fora da tela. */
     .menu-navegacao {
-        padding: 0.8rem 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem;
     }
 
     .menu-lista {
-        gap: 1rem; /* aperta pros 3 links caberem sem quebrar linha */
+        gap: 0.4rem 1rem;
+    }
+
+    .menu-link {
+        font-size: 0.85rem;
+    }
+
+    /* Rede de segurança: com o menu em duas linhas, os 5rem lá de cima não
+       bastam e o título da seção para cortado atrás dele.
+       O script.js mede a altura real do menu e sobrescreve este valor —
+       isto aqui é só o que vale se o JS não carregar. */
+    html {
+        scroll-padding-top: 8rem;
+    }
+
+    /* Botão de voltar ao topo um pouco menor e mais perto do canto,
+       pra não cobrir conteúdo em tela pequena. */
+    .botao-topo {
+        right: 1rem;
+        bottom: 1rem;
+        width: 42px;
+        height: 42px;
     }
 }

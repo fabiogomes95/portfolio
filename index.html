@@ -389,6 +389,12 @@
         </div>
     </footer>
 
+    <!-- Voltar ao topo. É um link comum pra #topo, então funciona mesmo sem JS
+         (o script só cuida de escondê-lo quando já estou no topo).
+         O aria-label existe porque o conteúdo é só uma seta: leitor de tela
+         anunciaria "seta pra cima", que não diz nada. -->
+    <a href="#topo" class="botao-topo" id="botao-topo" aria-label="Voltar ao topo">↑</a>
+
     <!-- "defer" = baixa o script junto com o HTML mas só roda no fim.
          Sem ele o JS rodaria antes das seções existirem e não acharia nada.
          Se eu adicionar outro script, manter o defer também. -->
